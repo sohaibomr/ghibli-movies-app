@@ -8,4 +8,8 @@ V1 = APIRouter()
 def get_movies():
     """Returns all the movies with it's people.
     """
-    return common.get_cache("movies")
+    movies, is_latest = common.get_movies_cache()
+
+    if movies is None:
+        return {"code": "400"}
+    return {"movies": movies, "is_latest": is_latest}
