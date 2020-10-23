@@ -8,22 +8,26 @@ from app.utils import common
 
 
 @pytest.mark.asyncio
-async def test_films_collection():
+async def test_movies_collection():
+    """Tests if movies are fetched and processed successfully
+    """
     await common.start_up()
-    films, is_latest = await collect_movies.collect_movies_info(
-        config.SETTINGS.films_url, config.SETTINGS.people_url)
+    movies, is_latest = await collect_movies.collect_movies_info(
+        config.SETTINGS.movies_url, config.SETTINGS.people_url)
 
     await common.shut_down()
-    assert films is not None
+    assert movies is not None
     assert is_latest is True
 
 
 @pytest.mark.asyncio
-async def test_films_collection_invalid_url():
+async def test_movies_collection_invalid_url():
+    """this serves as a negative testcase, to check that movies collection fails given wrong url or connection or timeouts error
+    """
     await common.start_up()
-    films, is_latest = await collect_movies.collect_movies_info(
+    movies, is_latest = await collect_movies.collect_movies_info(
         "x.x.x.x", "x.x.x.x")
 
     await common.shut_down()
     assert is_latest is False
-    assert films is None
+    assert movies is None

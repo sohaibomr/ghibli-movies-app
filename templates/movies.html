@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>Item Details</title>
+</head>
+
+<body>
+    <h1>Movies List</h1>
+    <p>Refreshed in last minute: {{is_latest}}</p>
+    {% for key, value in movies.items() %}
+    <ul>
+        <li>Movie: {{ value["title"]}}</li>
+        <li>People:</li>
+        {% for actor in value["people"] %}
+        <ul>
+            <li>{{actor["name"]}}</li>
+        </ul>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+</body>
+
+</html>
